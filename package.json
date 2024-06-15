@@ -1,0 +1,36 @@
+{
+  "name": "lovense-forza",
+  "version": "1.0.1",
+  "description": "Vibrate Lovense toys as you do specific actions in Forza",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lat3xKitty",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "forza.js": "github:MatthewCash/forza.js",
+    "node-fetch": "^3.3.2",
+    "prompt-sync": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lat3xKitty/lovense-forza"
+  },
+  "readme": "https://github.com/Lat3xKitty/lovense-forza/blob/main/README.md",
+  "homepage": "https://github.com/Lat3xKitty/lovense-forza/blob/main/README.md",
+  "keywords": [
+    "lovense",
+    "remote control",
+    "lewd",
+    "vibration",
+    "gamesync",
+    "forza"
+  ],
+  "contributors": [
+    "TrappyChastity"
+  ],
+  "type": "module"
+}
