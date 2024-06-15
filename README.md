@@ -1,80 +1,64 @@
-Lovense Forza
-Integrate Lovense toys with Forza games to provide a unique, immersive experience based on telemetry data.
+# Lovense Forza #
+This project was Forked from https://github.com/Lat3xKitty/lovense-forza Please Suport the orginal this one has been updated cause i found it no longer working <3
 
-Setup
-Prerequisites
-Ensure you have the following installed:
+**Enable "Data Out" in Forza Settings**
+- This is usually near the bottom of `HUD AND GAMEPLAY`
+- Set IP address to `127.0.0.1` and port to
 
-Node.js
-NPM (Node Package Manager)
-1. Clone the Repository
-sh
-Copy code
-git clone https://github.com/yourusername/lovense-forza.git
-cd lovense-forza
-2. Install Dependencies
-sh
-Copy code
-npm install
-3. Enable "Data Out" in Forza Settings
-HUD AND GAMEPLAY settings in Forza.
-Set IP address to 127.0.0.1.
-Set port according to the game:
-Forza Motorsport 7: 9917
-Forza Horizon 4: 9924
-Forza Horizon 5: 9925
-4. Network Isolation (for Xbox/Windows Store owners)
-Run the appropriate PowerShell command:
+| Game               | Port |
+| ------------------ | ---- |
+| Forza Motorsport 7 | 9917 |
+| Forza Horizon 4    | 9924 |
+| Forza Horizon 5    | 9925 |
 
-Forza Motorsport 7:
-sh
-Copy code
+### Network Isolation ###
+Steam/Linux players will not have to do this but for Xbox / Windows store owners, Windows Apps prevent localhost connections by default for "security" This will need to be disabled for this program to work
+
+Thankfully it can be done on a per-app basis by running the corresponding powershell command for your game:
+#### Forza Motorsport 7: ####
+
+```
 CheckNetIsolation.exe LoopbackExempt -a -n="microsoft.apollobasegame_1.174.4791.2_x64__8wekyb3d8bbwe"
-Forza Horizon 4:
-sh
-Copy code
+```
+
+#### Forza Horizon 4: ####
+
+```
 CheckNetIsolation.exe LoopbackExempt -a -n="microsoft.sunrisebasegame_8wekyb3d8bbwe"
-Forza Horizon 5:
-sh
-Copy code
+```
+
+#### Forza Horizon 5: ####
+
+```
 CheckNetIsolation.exe LoopbackExempt -a -n="microsoft.624F8B84B80_8wekyb3d8bbwe"
-5. Starting the Application
-sh
-Copy code
-npm start
-This will execute the start script in your package.json file, which runs node index.js.
+```
 
-6. Getting Toy Data
-Enable and connect your Lovense toy.
-Visit the Lovense API page available on your LAN by navigating to http://{lovense_ip}:30010/api/lan/getToys.
-Look for:
-platform: pc, android, ios.
-domain: The domain Lovense is on, e.g., 192-168-178-16.lovense.club.
-port: Typically 30010.
-toyID: Found in the toys section, "status": 1 means the currently active toy.
-Configuration
-Edit the index.js file to configure the following variables with your Lovense toy details:
 
-javascript
-Copy code
-const toyID = 'YOUR_TOY_ID'; // Find the ToyId
-const platform = 'pc'; // Device platform: pc / android / ios
-const domain = '192-168-220-1.lovense.club'; // Domain from Lovense
-const port = '30010'; // Port
-Usage
-Choose the telemetry option for vibration response:
+## Starting the app: ##
 
-rpm - RPM from the Engine (recommended for best experience).
-speed - Current Speed.
-rumble-average - Surface Rumble (Average).
-power - Power of the vehicle.
-torque - Torque of the vehicle.
-accel - Acceleration pedal pressure.
-brake - Brake pedal pressure.
-Troubleshooting
-Common Issues
-Network Isolation: Ensure you've run the appropriate PowerShell command to disable network isolation.
-404 Invalid Parameter: Check that all parameters are correctly set in the request payload.
-SSL/TLS Issues: If you encounter SSL certificate verification errors, consider disabling strict SSL checking in your HTTP requests (only for development purposes).
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+`npm start`
+
+Triggers the start function in `package.json` which simply runs node on `index.js`
+
+## Telemetry to choose from ##
+
+Telemetry to pick between:
+
+* `rpm`            _- RPM from the Engine **(Best all around experience)**_
+* `speed`          _- Current Speed, slow but fun_
+* `rumble-average` _- Surface Rumble **(Average)**_
+* `power`          _- Not quite sure, seems to be a similar thing to RPM._
+* `torque`         _- Torque of the Vehicle_
+* `accel`          _- How hard are you pushing down on the **Accelerate** Pedal_
+* `brake`          _- How hard are you pushing down on the **Brake** Pedal_
+
+## Where to get toy Data ##
+
+Enable Lovense and connect it to a device `pc, android, ios` then visit the API pagethat is now available on your lan that will return a `json` document by clicking [api/lan/getToys](https://api.lovense.com/api/lan/getToys)
+
+You are looking for the
+
+* **platform** - _pc, android, ios_
+* **domain** - _The domain Lovense is on_ e.g `192-168-178-16.lovense.club`
+* **port** - _Will proably be `30010`_
+* **toyID** - _this can be found in the `toys` section, `"status": 1` means the currently active toy (_if one is connected_) if you have two or more (_including generations_) of the same device, the are likely to show up with the same name (_e.g Domi and Domi 2 both listed as domi_) but have different `hVersions`. If you've given them nicknames that's even easier_
